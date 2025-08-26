@@ -18,6 +18,8 @@ import TermsAndConditions from './components/TermsAndConditions';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ContactPage from './components/ContactPage';
 import ScamAdvisory from './components/ScamAdvisory';
+import BugBountyBanner from './components/BugBountyBanner';
+import BugBountyPage from './components/BugBountyPage';
 
 const COVALENT_KEY = 'cqt_rQj9pWHk7jrKrDJPYByfhmRpCDCW';
 
@@ -66,6 +68,7 @@ function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showScamAdvisory, setShowScamAdvisory] = useState(false);
+  const [showBugBounty, setShowBugBounty] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   // Detect mobile device
@@ -574,6 +577,15 @@ useEffect(() => {
         />
       )}
       
+      {/* Bug Bounty Modal */}
+      {showBugBounty && (
+        <BugBountyPage
+          darkMode={darkMode}
+          themeClasses={themeClasses}
+          onClose={() => setShowBugBounty(false)}
+        />
+      )}
+      
       <Header
         darkMode={darkMode}
         setDarkMode={setDarkMode}
@@ -582,6 +594,12 @@ useEffect(() => {
         showWalletAnimation={showWalletAnimation}
         themeClasses={themeClasses}
         isMobile={isMobile}
+      />
+
+      {/* Bug Bounty Banner */}
+      <BugBountyBanner
+        darkMode={darkMode}
+        themeClasses={themeClasses}
       />
 
       {/* Main Content */}
@@ -1035,6 +1053,13 @@ useEffect(() => {
       className={`${themeClasses.textSecondary} hover:text-red-600 transition-colors duration-200`}
     >
       Scam Advisory
+    </button>
+<span className={`${themeClasses.textSecondary} hidden sm:inline`}>•</span>
+    <button
+      onClick={() => setShowBugBounty(true)}
+      className={`${themeClasses.textSecondary} hover:text-orange-600 transition-colors duration-200`}
+    >
+      Bug Bounty
     </button>
 <span className={`${themeClasses.textSecondary} hidden sm:inline`}>•</span>
     <button
